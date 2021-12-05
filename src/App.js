@@ -13,19 +13,43 @@ const mic = new SpeechRecognition
 // Configuración del reconocimiento de voz
 mic.continous = true; // Si es false devuelve todo cuando acabamos
 mic.interimResults = true; // Mejora calidad del texto por contexto
-mic.lang="es ES"; // Idioma
+mic.lang="es-ES"; // Idioma
 
 function App() {
-    // Estado para el micrófono, activo o no
+    
     const [isListening, setIslistening] = useState(false)
+    const [notes, setNotes] = useState(null)
 
     // Ahora la funcionalidad del micrófono con useEffect
     useEffect(() => {
         handleListen();
     }, [isListening])
 
+    // En esta función va a ir toda la lógica del micro
     const handleListen = () => {
-
+        if(isListening) {
+            mic.start();
+            mic.onend = () => {
+                console.log("continue...")
+                mic.start()
+            }
+        } else {
+            mic.stop();
+            mic.onend = () => {
+                console.log("Stopped the microphone on Click")
+            }
+        }
+        mic.onstart = () => {
+            console.log("Microphone is on");
+        }
+        mic.onresult = (event) => {
+            const transcript = Array.from(event.results)
+            .map(result => result[0])
+            .map(result => result.transcript).join("");
+            console.log(transcript)
+            setNotes(transcript)
+            mic.onerror = (event) => console.log(event.error)
+        }
     }
 
     return (
