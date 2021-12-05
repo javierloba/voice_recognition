@@ -1,11 +1,37 @@
-import React from 'react'
+import { Grid, Paper, makeStyles } from '@material-ui/core';
+import uuid from "react-uuid"
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        flexGrow: 1,
+    },
+    paper: {
+        padding: theme.spacing(2),
+        textAlign: 'center',
+        color: theme.palette.text.secondary,
+    },
+}));
 
 const DisplayNotes = ({data}) => {
+    const classes = useStyles();
+
     return (
-        <div>
-        
+        <div className={classes.root}>
+            <Grid container spacing={3}>
+                {
+                    data.map((savedNote => (
+                        <Grid item xs={12} sm={4} key={savedNote.group}>
+                            {savedNote.name.map((string) => (
+                                <Paper className={classes.paper}>
+                                    <div key={uuid()}>{string}</div>
+                                </Paper>
+                            ))}
+                        </Grid>
+                    )))
+                }
+            </Grid>
         </div>
     )
 }
 
-export default DisplayNotes
+export default DisplayNotes;
