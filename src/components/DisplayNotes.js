@@ -1,9 +1,9 @@
 import React from 'react'
 
-const DisplayNotes = () => {
+const DisplayNotes = ({data}) => {
     return (
         <div>
-            <h1>estas son las notas</h1>
+        
         </div>
     )
 }

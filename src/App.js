@@ -8,7 +8,7 @@ import DisplayNotes from './components/DisplayNotes'
 
 // Inicialización del reconocimiento de voz
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
-const mic = new SpeechRecognition
+const mic = new SpeechRecognition()
 
 // Configuración del reconocimiento de voz
 mic.continous = true; // Si es false devuelve todo cuando acabamos
@@ -18,7 +18,25 @@ mic.lang="es-ES"; // Idioma
 function App() {
     
     const [isListening, setIslistening] = useState(false)
-    const [notes, setNotes] = useState(null)
+
+    const [note, setNote] = useState(null)
+
+    const [savedNotestodo, setSavedNotestodo] = useState([]);
+    const [savedNotesinprocess, setSavedNotesinprocess] = useState([]);
+    const [savedNotesdone, setSavedNotesdone] = useState([]);
+
+    const savedNotes = [
+        {
+            group: "todo",
+            name: savedNotestodo,
+        }, {
+            group: "inprocess",
+            name: savedNotesinprocess,
+        }, {
+            group: "done",
+            name: savedNotesdone,
+        }
+    ]
 
     // Ahora la funcionalidad del micrófono con useEffect
     useEffect(() => {
@@ -39,15 +57,17 @@ function App() {
                 console.log("Stopped the microphone on Click")
             }
         }
+
         mic.onstart = () => {
             console.log("Microphone is on");
         }
+
         mic.onresult = (event) => {
             const transcript = Array.from(event.results)
             .map(result => result[0])
             .map(result => result.transcript).join("");
             console.log(transcript)
-            setNotes(transcript)
+            setNote(transcript)
             mic.onerror = (event) => console.log(event.error)
         }
     }
@@ -67,19 +87,26 @@ function App() {
                 </IconButton>
             </div>
             {/* Este lo creamos con styled components */}
-            <NeonButton status="todo">
+            <NeonButton status="todo" onClick={() => {
+                setSavedNotestodo([...savedNotestodo, note])
+            }}>
                 To do
             </NeonButton>
-            <NeonButton status="inprocess">
+            <NeonButton status="inprocess" onClick={() => {
+                setSavedNotesinprocess([...savedNotesinprocess, note])
+            }}>
                 In process
             </NeonButton>
-            <NeonButton status="done">
+            <NeonButton status="done" onClick={() => {
+                setSavedNotesdone([...savedNotesdone, note])
+            }}>
                 Done
             </NeonButton>
             <Typography variant="h4" component="h2" gutterBottom>
-                Texto procesado
+                {console.log(savedNotes)}
+                {note}
             </Typography>
-            <DisplayNotes />
+            <DisplayNotes data={ savedNotes } />
         </div>
     </>
     );
