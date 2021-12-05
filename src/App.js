@@ -6,6 +6,15 @@ import { IconButton, Typography } from "@material-ui/core"
 import { NeonButton } from "./components/StyledComponents"
 import DisplayNotes from './components/DisplayNotes'
 
+// Inicialización del reconocimiento de voz
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
+const mic = new SpeechRecognition
+
+// Configuración del reconocimiento de voz
+mic.continous = true; // Si es false devuelve todo cuando acabamos
+mic.interimResults = true; // Mejora calidad del texto por contexto
+mic.lang="es ES"; // Idioma
+
 function App() {
     // Estado para el micrófono, activo o no
     const [isListening, setIslistening] = useState(false)
