@@ -1,5 +1,6 @@
-import { Grid, Paper, makeStyles } from '@material-ui/core';
+import { Grid, Paper, makeStyles } from '@material-ui/core'
 import uuid from "react-uuid"
+import { NeonDiv } from "./StyledComponents"
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -21,11 +22,11 @@ const DisplayNotes = ({data}) => {
                 {
                     data.map((savedNote => (
                         <Grid item xs={12} sm={4} key={savedNote.group}>
-                            {savedNote.name.map((string) => (
-                                <Paper className={classes.paper}>
-                                    <div key={uuid()}>{string}</div>
-                                </Paper>
-                            ))}
+                            <Paper className={classes.paper}>
+                                {savedNote.name.map((string) => (
+                                    <NeonDiv as="div" key={uuid()}>{string}</NeonDiv>
+                                ))}
+                            </Paper>
                         </Grid>
                     )))
                 }

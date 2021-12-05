@@ -22,6 +22,7 @@ export const NeonButton = styled(MyButton)`
     color: ${({status})  => 
     status === "done" ? "green" 
     : status === "inprocess" ? "orange" : "crimson"};
+    
     &:hover {
         box-shadow: 0 0 10px 0 ${({status})  => 
         status === "done" ? "green" 
@@ -30,4 +31,18 @@ export const NeonButton = styled(MyButton)`
         status === "done" ? "green" 
         : status === "inprocess" ? "orange" : "crimson"};
     }
+
+    &:focus {
+        outline-width: 0;
+    }
+`
+
+export const NeonDiv = styled(NeonButton)`
+    width: 90%;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 10px;
+    text-transform: capitalize;
+    display: flex;
+
 `

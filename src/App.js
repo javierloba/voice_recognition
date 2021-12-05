@@ -87,18 +87,21 @@ function App() {
                 </IconButton>
             </div>
             {/* Este lo creamos con styled components */}
-            <NeonButton status="todo" onClick={() => {
+            <NeonButton status="todo" disabled={!note} onClick={() => {
                 setSavedNotestodo([...savedNotestodo, note])
+                setNote("")
             }}>
                 To do
             </NeonButton>
-            <NeonButton status="inprocess" onClick={() => {
+            <NeonButton status="inprocess" disabled={!note} onClick={() => {
                 setSavedNotesinprocess([...savedNotesinprocess, note])
+                setNote("")
             }}>
                 In process
             </NeonButton>
-            <NeonButton status="done" onClick={() => {
+            <NeonButton status="done" disabled={!note} onClick={() => {
                 setSavedNotesdone([...savedNotesdone, note])
+                setNote("")
             }}>
                 Done
             </NeonButton>
