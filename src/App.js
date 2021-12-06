@@ -43,7 +43,7 @@ function App() {
         handleListen();
     }, [isListening])
 
-    // En esta función va a ir toda la lógica del micro
+    // La lógica del micro
     const handleListen = () => {
         if(isListening) {
             mic.start();
@@ -66,7 +66,6 @@ function App() {
             const transcript = Array.from(event.results)
             .map(result => result[0])
             .map(result => result.transcript).join("");
-            console.log(transcript)
             setNote(transcript)
             mic.onerror = (event) => console.log(event.error)
         }
@@ -75,7 +74,7 @@ function App() {
     return (
     <>
         <div className="notes">
-            <h1>Voice notes</h1>
+            <h1>Voice Notes</h1>
 
             <div className="microphone">
                 {/* Este lo sacamos de material-ui */}
