@@ -7,6 +7,10 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
     },
     paper: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
         padding: theme.spacing(2),
         textAlign: 'center',
         color: theme.palette.text.secondary,
@@ -24,7 +28,10 @@ const DisplayNotes = ({data}) => {
                         <Grid item xs={12} sm={4} key={savedNote.group}>
                             <Paper className={classes.paper}>
                                 {savedNote.name.map((string) => (
-                                    <NeonDiv as="div" key={uuid()}>{string}</NeonDiv>
+                                    <NeonDiv as="div" 
+                                    key={uuid()}
+                                    status={savedNote.group}
+                                    >{string}</NeonDiv>
                                 ))}
                             </Paper>
                         </Grid>

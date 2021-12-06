@@ -76,6 +76,7 @@ function App() {
     <>
         <div className="notes">
             <h1>Voice notes</h1>
+
             <div className="microphone">
                 {/* Este lo sacamos de material-ui */}
                 <IconButton onClick={()=> setIslistening((prevState => !prevState))}>
@@ -86,25 +87,29 @@ function App() {
                     />
                 </IconButton>
             </div>
-            {/* Este lo creamos con styled components */}
-            <NeonButton status="todo" disabled={!note} onClick={() => {
-                setSavedNotestodo([...savedNotestodo, note])
-                setNote("")
-            }}>
-                To do
-            </NeonButton>
-            <NeonButton status="inprocess" disabled={!note} onClick={() => {
-                setSavedNotesinprocess([...savedNotesinprocess, note])
-                setNote("")
-            }}>
-                In process
-            </NeonButton>
-            <NeonButton status="done" disabled={!note} onClick={() => {
-                setSavedNotesdone([...savedNotesdone, note])
-                setNote("")
-            }}>
-                Done
-            </NeonButton>
+
+            <div>
+                {/* Este lo creamos con styled components */}
+                <NeonButton status="todo" disabled={!note} onClick={() => {
+                    setSavedNotestodo([...savedNotestodo, note])
+                    setNote("")
+                }}>
+                    To do
+                </NeonButton>
+                <NeonButton status="inprocess" disabled={!note} onClick={() => {
+                    setSavedNotesinprocess([...savedNotesinprocess, note])
+                    setNote("")
+                }}>
+                    In process
+                </NeonButton>
+                <NeonButton status="done" disabled={!note} onClick={() => {
+                    setSavedNotesdone([...savedNotesdone, note])
+                    setNote("")
+                }}>
+                    Done
+                </NeonButton>
+            </div>
+            
             <Typography variant="h4" component="h2" gutterBottom>
                 {console.log(savedNotes)}
                 {note}
