@@ -2,7 +2,7 @@
 
 https://voice-recognition-jlg.netlify.app/
 
-App de creación de notas por reconocimiento de voz con React y Speech Recongition API.
+App de creación de notas por reconocimiento de voz con React y Speech Recognition API.
 https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition
 
 El usuario puede crear notas en tres estados, "todo", "in process" o "done".
